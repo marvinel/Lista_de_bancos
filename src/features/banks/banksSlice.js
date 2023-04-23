@@ -3,18 +3,17 @@ import { createSlice } from "@reduxjs/toolkit";
 export const banksSlice = createSlice({
     name: 'bank',
     initialState: {
-        listBanks: [],
-        value: 0
+        listBanks: []
     },
     reducers: {
         saveBanks: (state, action) => {
             state.listBanks = action.payload
+            const bankListJSON = JSON.stringify(action.payload)
+            localStorage.setItem('bankList', bankListJSON)
         },
-        increment: (state) =>{
-            state.value += 1
-        }
+
     }
 })
 
-export const {saveBanks, increment} = banksSlice.actions
+export const {saveBanks} = banksSlice.actions
 export default banksSlice.reducer

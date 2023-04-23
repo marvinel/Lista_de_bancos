@@ -28,8 +28,6 @@ function App() {
     axios.get('https://dev.obtenmas.com/catom/api/challenge/banks')
     .then(res => {
       dispatch(saveBanks(res.data))
-      const bankListJSON = JSON.stringify(res.data)
-      localStorage.setItem(BANK_LIST_KEY, bankListJSON)
     })
     .catch(err => {
       console.log(err)
@@ -38,10 +36,11 @@ function App() {
 
  },[dispatch])
 
+ 
   return (
-    <>
+    < >
       <h1>Lista de Bancos</h1>
-    <div className='card-wrap'>
+    <div  className='card-wrap'>
       {banks.length > 0 ?
         banks.map((bank, index) => (
           <div key={index} className="card2">
@@ -50,7 +49,7 @@ function App() {
             </div>
             <div className="content">
               <div className="content-text">
-                <h3 className='content-title'>{bank.bankName}</h3>
+                <h3 data-testid={bank.bankName} className='content-title'>{bank.bankName}</h3>
                 <p className='content-age'>AGE: {bank.age}</p>
               </div>
               <div className="description">    

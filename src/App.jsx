@@ -24,10 +24,9 @@ function App() {
     dispatch(saveBanks(storedBankList))
 
   }else{  
-    console.log("hago el fetch")
+
     axios.get('https://dev.obtenmas.com/catom/api/challenge/banks')
     .then(res => {
-      console.log(res.data)
       dispatch(saveBanks(res.data))
       const bankListJSON = JSON.stringify(res.data)
       localStorage.setItem(BANK_LIST_KEY, bankListJSON)
@@ -43,7 +42,7 @@ function App() {
     <>
       <h1>Lista de Bancos</h1>
     <div className='card-wrap'>
-      {
+      {banks.length > 0 ?
         banks.map((bank, index) => (
           <div key={index} className="card2">
             <div  className="image">
@@ -59,7 +58,11 @@ function App() {
               </div>
             </div>
           </div>
-        ))}
+
+        
+        ))
+        : <h2>No hay bancos disponibles</h2>
+      }
         </div>
      
     </>
